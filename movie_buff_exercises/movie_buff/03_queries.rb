@@ -1,7 +1,7 @@
 def what_was_that_one_with(those_actors)
   # Find the movies starring all `those_actors` (an array of actor names).
   # Show each movie's title and id.
-  
+  Actor.where("actors.name IN (?)", those_actors).joins(:movies).group("movies.id").having("COUNT(actors.id) = ?", those_actors.length).select("movies.title, movies.id")
 end
 
 def golden_age
